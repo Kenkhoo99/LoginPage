@@ -8,4 +8,9 @@
     <string name="password">Password</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="not_member">Not a member?</string>
+    <string name="forgot_password1">Forgot Password?</string>
+    <string name="forgot_password_text">Forgot your password?No worries, please enter your
+                                        e-mail address and you will be able to reset your
+                                        password in no time. Any questions, please e-mail us at</string>
+    <string name="genius_email"><u>geniuslearningapp@gmail.com</u></string>
 </resources>
