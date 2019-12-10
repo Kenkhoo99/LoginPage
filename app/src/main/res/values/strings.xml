@@ -11,6 +11,6 @@
     <string name="forgot_password1">Forgot Password?</string>
     <string name="forgot_password_text">Forgot your password?No worries, please enter your
                                         e-mail address and you will be able to reset your
-                                        password in no time. Any questions, please e-mail us at</string>
-    <string name="genius_email"><u>geniuslearningapp@gmail.com</u></string>
+        password in no time. Any questions, please e-mail us at <font fgcolor="#173172"><u>geniuslearningapp@gmail.com</u></font></string>
+    <string name="forgot_pw_email">Send Email</string>
 </resources>
