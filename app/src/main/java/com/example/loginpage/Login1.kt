@@ -24,5 +24,11 @@ class Login1 : AppCompatActivity() {
             val intent = Intent(this, Forgot_Password:: class.java)
             startActivity(intent)
         }
+
+        val button3 = findViewById<Button>(R.id.register2_button)
+        button3.setOnClickListener{
+            val intent = Intent(this, Register:: class.java)
+            startActivity(intent)
+        }
     }
 }
