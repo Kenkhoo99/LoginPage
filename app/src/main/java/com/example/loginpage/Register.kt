@@ -87,7 +87,7 @@ class Register : AppCompatActivity() {
         lastname = studLastName?.text.toString()
         birthdate = studBirthdate?.text.toString()
 
-//        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(
+//      if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(
 //                confirm_pass) && !TextUtils.isEmpty(firstname) && !TextUtils.isEmpty(lastname) )
 
 
