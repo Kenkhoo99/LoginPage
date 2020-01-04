@@ -8,6 +8,7 @@ import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -87,10 +88,77 @@ class Register : AppCompatActivity() {
         lastname = studLastName?.text.toString()
         birthdate = studBirthdate?.text.toString()
 
-//      if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(
-//                confirm_pass) && !TextUtils.isEmpty(firstname) && !TextUtils.isEmpty(lastname) )
+      if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(
+                confirm_pass) && !TextUtils.isEmpty(firstname) && !TextUtils.isEmpty(lastname) && !TextUtils.isEmpty(
+              birthdate)) {
+
+          val dialog = setProgressDialog(this, "Registering User...")
+          dialog.show()
+
+          mAuth!!
+              .createUserWithEmailAndPassword(email!!, password!!)
+              .addOnCompleteListener(this) { task ->
+                  dialog.hide()
+
+                  if (task.isSuccessful) {
+                      // Sign in success, update UI with the signed-in user's information
+                      Log.d(TAG, "createUserWithEmail:success")
+
+                      val userId = mAuth!!.currentUser!!.uid
+
+                      //Verify email
+                      verifyEmail()
+
+                      //update user profile information
+                      val currentUserDb = mDataBaseReference!!.child(userId)
+                      currentUserDb.child("firstName").setValue(firstname)
+                      currentUserDb.child("lastName").setValue(lastname)
+                      currentUserDb.child("birthDate").setValue(birthdate)
 
 
+                      //
+                      updateUserInfoAndUI()
+                  } else
+                  {
+                      // If sign in fails, display a message to the user.
+                      Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                      Toast.makeText(this@Register, "Authentication failed.",
+                          Toast.LENGTH_SHORT).show()
+                  }
+              }
+      }else
+          {
+              Toast.makeText(this, "Enter All The Details", Toast.LENGTH_SHORT).show()
+          }
+    }
+
+    private fun verifyEmail() {
+        val mUser = mAuth!!.currentUser
+        mUser!!.sendEmailVerification()
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        this@Register,
+                        "Verification email sent to " + mUser.getEmail(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Log.e(TAG, "sendEmailVerification", task.exception)
+                    Toast.makeText(
+                        this@Register,
+                        "Failed to send verification email.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
+
+        private fun updateUserInfoAndUI() {
+        //start next activity
+        val intent = Intent(this@Register, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 
 
